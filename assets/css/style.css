@@ -1,0 +1,82 @@
+/* Fichier: style.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+}
+
+.logo {
+    margin-bottom: 20px;
+    width: 100px;
+    height: auto;
+}
+
+form.login {
+    max-width: 380px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+form.login:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.form-label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.form-check-label {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.form-register a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-register a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #6c757d;
+    text-align: center;
+}
