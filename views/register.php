@@ -11,7 +11,7 @@
 
 <body class="d-flex flex-column justify-content-center align-items-center vh-100 bg-light">
 
-    <img class="logo mb-3" src="assets/imgs/logo.webp" alt="Logo" width="142 px" height="auto">
+    <img class="logo mb-3" src="../assets/imgs/logo.webp" alt="Logo" width="142 px" height="auto">
 
     <form action="assets/files/register.php" method="post" class="login bg-white p-4 rounded shadow-sm w-100"
         style="max-width: 330px;">

@@ -14,7 +14,7 @@
 
     <img class="logo" src="assets/imgs/logo.webp" alt="Logo">
 
-    <form method="post" action="assets/files/login.php" class="login">
+    <form method="post" action="views/login.php" class="login">
         <div class="mb-3">
             <label for="email" class="form-label">Adresse email</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="nom@exemple.com" required>
@@ -28,7 +28,7 @@
         <button type="submit" class="btn btn-primary w-100">Se connecter</button>
 
         <div class="form-register text-center">
-            <a href="register.html" target="_self">Pas encore inscrit ? Inscrivez-vous</a>
+            <a href="views/register.php" target="_self">Pas encore inscrit ? Inscrivez-vous</a>
         </div>
 
         <p class="mt-4 text-muted text-center">© 2024–2025</p>
