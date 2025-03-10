@@ -2,68 +2,66 @@
 
 namespace Utils;
 
-use Models\User;
-
-class Auth {
-    // Tenter de connecter un utilisateur
-    public static function login($email, $password) {
-        $user = User::findByEmail($email);
-        
-        if (!$user) {
-            return false;
+class Session {
+    // Démarrer la session si elle n'est pas déjà démarrée
+    public static function start() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
-        
-        if (!$user->verifyPassword($password)) {
-            return false;
-        }
-        
-        // Enregistrer l'utilisateur en session
-        Session::set('user_id', $user->getId());
-        Session::set('user_email', $user->getEmail());
-        Session::set('user_role', $user->getRole());
-        
-        return true;
     }
     
-    // Déconnecter l'utilisateur
-    public static function logout() {
-        Session::destroy();
+    // Définir une valeur dans la session
+    public static function set($key, $value) {
+        self::start();
+        $_SESSION[$key] = $value;
     }
     
-    // Obtenir l'utilisateur connecté
-    public static function getUser() {
-        if (!Session::isLoggedIn()) {
-            return null;
+    // Récupérer une valeur de la session
+    public static function get($key, $default = null) {
+        self::start();
+        return $_SESSION[$key] ?? $default;
+    }
+    
+    // Vérifier si une clé existe dans la session
+    public static function has($key) {
+        self::start();
+        return isset($_SESSION[$key]);
+    }
+    
+    // Supprimer une valeur de la session
+    public static function remove($key) {
+        self::start();
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
         }
-        
-        return User::findById(Session::get('user_id'));
+    }
+    
+    // Détruire la session
+    public static function destroy() {
+        self::start();
+        $_SESSION = [];
+        session_destroy();
+    }
+    
+    // Récupérer et supprimer un message flash
+    public static function getFlash($key, $default = null) {
+        $value = self::get($key, $default);
+        self::remove($key);
+        return $value;
+    }
+    
+    // Définir un message flash
+    public static function setFlash($key, $value) {
+        self::set($key, $value);
     }
     
     // Vérifier si l'utilisateur est connecté
-    public static function check() {
-        return Session::isLoggedIn();
+    public static function isLoggedIn() {
+        return self::has('user_id') && self::has('user_email');
     }
     
     // Vérifier si l'utilisateur a un rôle spécifique
     public static function hasRole($role) {
-        return Session::hasRole($role);
-    }
-    
-    // Rediriger si l'utilisateur n'est pas connecté
-    public static function requireLogin() {
-        if (!self::check()) {
-            header('Location: index.html');
-            exit();
-        }
-    }
-    
-    // Rediriger si l'utilisateur n'a pas le rôle requis
-    public static function requireRole($role) {
-        self::requireLogin();
-        
-        if (!self::hasRole($role)) {
-            header('Location: index.html');
-            exit();
-        }
+        return self::isLoggedIn() && self::get('user_role') === $role;
     }
 }

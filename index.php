@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+
+require_once 'config/autoload.php';
+include_once 'views/index.html';
+
+?>
 <html lang="fr">
 
 <head>

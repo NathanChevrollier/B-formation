@@ -1,14 +1,16 @@
 <?php
 
-include_once 'assets/files/bdd.php';
+require_once 'config/autoload.php';
+use Models\User;
+use Models\Classroom;
+use Utils\Auth;
+use Utils\Session;
 
 session_start();
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION['user_role'] !== 'teacher') {
     header("Location: index.html");
     exit();
 }
-
-include_once 'assets/files/teacher_info.php';
 
 ?>
 

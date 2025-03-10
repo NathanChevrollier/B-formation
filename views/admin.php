@@ -1,6 +1,11 @@
 <?php
 
-include_once 'assets/files/bdd.php';
+require_once 'config/autoload.php';
+use Utils\Auth;
+
+Auth::requireRole('admin');
+$user = Auth::getUser();
+$user_name = $user->getEmail();
 
 session_start();
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION['user_role'] !== 'admin') {

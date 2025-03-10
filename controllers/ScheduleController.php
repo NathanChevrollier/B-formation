@@ -9,6 +9,8 @@ use Models\User;
 use Utils\Auth;
 use Utils\Session;
 
+use Config\Database;
+
 class ScheduleController {
     // Afficher la liste des emplois du temps
     public function index() {

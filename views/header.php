@@ -1,6 +1,6 @@
 <?php
 
-include_once 'assets/files/bdd.php';
+require_once 'config/autoload.php';
 
 
 if (session_status() === PHP_SESSION_NONE) {
