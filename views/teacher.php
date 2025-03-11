@@ -1,17 +1,26 @@
 <?php
-
 require_once 'config/autoload.php';
-use Models\User;
-use Models\Classroom;
 use Utils\Auth;
-use Utils\Session;
+use Models\Schedule;
 
-session_start();
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION['user_role'] !== 'teacher') {
-    header("Location: index.html");
-    exit();
+Auth::requireRole('teacher');
+$user = Auth::getUser();
+$user_name = $user->getFirstname() . ' ' . $user->getSurname();
+
+// Récupérer les cours du jour
+$schedule = Schedule::findTodayForTeacher($user->getId());
+
+// Récupérer les signatures du cours en cours
+$currentClass = Schedule::findCurrentForTeacher($user->getId());
+$signatures = $currentClass ? $currentClass->getSignatures() : [];
+
+// Récupérer les classes et élèves
+$classes = [];
+// Pour chaque classe que le professeur enseigne
+$teacherClasses = Schedule::getClassesByTeacher($user->getId());
+foreach ($teacherClasses as $class) {
+    $classes[$class->getName()] = $class->getStudents();
 }
-
 ?>
 
 <!DOCTYPE html>

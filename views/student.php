@@ -1,50 +1,18 @@
 <?php
-
 require_once 'config/autoload.php';
-use Models\User;
-use Models\Classroom;
 use Utils\Auth;
-use Utils\Session;
+use Models\Schedule;
+use Models\Signature;
 
-session_start();
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION['user_role'] !== 'student') {
-    header("Location: index.html");
-    exit();
-}
+Auth::requireRole('student');
+$user = Auth::getUser();
+$user_name = $user->getFirstname() . ' ' . $user->getSurname();
 
-$user_id = $_SESSION['user_id'];
+$class = $user->getClass();
+$class_name = $class ? $class->getName() : 'Non attribuée';
 
-// Récupérer les informations de l'étudiant
-$sql = "SELECT firstname, surname FROM user WHERE id = :user_id";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-$stmt->execute();
-$user_info = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$firstname = $user_info['firstname'] ?? 'Inconnu';
-$surname = $user_info['surname'] ?? '';
-$user_name = trim($firstname . ' ' . $surname);
-
-// Récupérer les informations de la classe de l'étudiant
-$sql = "SELECT class.name AS class_name FROM class 
-        INNER JOIN user ON class.id = user.class_id 
-        WHERE user.id = :user_id";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-$stmt->execute();
-$class_info = $stmt->fetch(PDO::FETCH_ASSOC);
-$class_name = $class_info['class_name'] ?? 'Non attribuée';
-
-// Récupérer l'emploi du temps de l'étudiant
-$sql = "SELECT schedule.id, schedule.start_datetime, schedule.end_datetime, subject.name AS subject_name
-        FROM schedule
-        INNER JOIN subject ON schedule.Subject_id = subject.id
-        WHERE schedule.class_id = (SELECT class_id FROM user WHERE id = :user_id)
-        ORDER BY schedule.start_datetime";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-$stmt->execute();
-$schedule = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Récupérer l'emploi du temps
+$schedule = Schedule::findByClassId($user->getClassId());
 
 ?>
 

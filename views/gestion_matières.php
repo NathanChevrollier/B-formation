@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION
 <div class="container">
     <!-- Ajouter une matière -->
     <h2 class="mb-4">Ajouter une matière</h2>
-    <form method="POST" action="assets/files/manage_subjects.php" class="mb-4">
+    <form method="POST" action="subject_controller.php" class="mb-4">
         <div class="row g-3">
             <div class="col-md-10">
                 <input type="text" name="subject_name" class="form-control" placeholder="Nom de la matière" required>
@@ -57,7 +57,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION
         <tbody>
             <?php foreach ($subjects as $subject): ?>
             <tr>
-                <form method="POST" action="assets/files/manage_subjects.php">
+                <form method="POST" action="subject_controller.php">
                     <td>
                         <input type="text" name="subject_name" value="<?php echo $subject['name']; ?>" class="form-control">
                     </td>

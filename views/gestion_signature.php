@@ -36,7 +36,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION
     <h2 class="mb-4">Signatures de Présence</h2>
 
     <h3>Ajouter une signature</h3>
-    <form method="POST" class="mb-4">
+    <form method="POST" action="signature_controller.php" class="mb-4">
         <input type="hidden" name="action" value="add">
         <div class="mb-3">
             <label for="user_id" class="form-label">Élève :</label>

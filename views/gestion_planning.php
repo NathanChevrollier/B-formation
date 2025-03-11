@@ -73,7 +73,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION
                                     <h5 class="modal-title" id="editModalLabel<?= $row['schedule_id']; ?>">Modifier l'Emploi du Temps</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form method="POST">
+                                <form method="POST" action="schedule_controller.php">
                                     <div class="modal-body">
                                         <input type="hidden" name="action" value="edit">
                                         <input type="hidden" name="schedule_id" value="<?= $row['schedule_id']; ?>">

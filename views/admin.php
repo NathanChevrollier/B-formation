@@ -1,19 +1,10 @@
 <?php
-
 require_once 'config/autoload.php';
 use Utils\Auth;
 
 Auth::requireRole('admin');
 $user = Auth::getUser();
 $user_name = $user->getEmail();
-
-session_start();
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION['user_role'] !== 'admin') {
-    header("Location: index.html");
-    exit();
-}
-
-$user_name = $_SESSION['user_email'] ?? 'Administrateur';
 ?>
 
 <!DOCTYPE html>

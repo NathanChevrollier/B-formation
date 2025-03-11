@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION
 
 <div class="container">
     <h2 class="mb-4">Ajouter une Classe</h2>
-    <form method="POST" action="assets/files/manage_classes.php" class="mb-4">
+    <form method="POST" action="class_controller.php" class="mb-4">
         <div class="row g-3">
             <div class="col-md-10">
                 <input type="text" name="class_name" class="form-control" placeholder="Nom de la classe" required>
@@ -56,7 +56,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION
         <tbody>
             <?php foreach ($classes as $class): ?>
             <tr>
-                <form method="POST" action="assets/files/manage_classes.php">
+                <form method="POST" action="class_controller.php">
                     <td>
                         <input type="text" name="class_name" value="<?php echo $class['name']; ?>" class="form-control">
                     </td>

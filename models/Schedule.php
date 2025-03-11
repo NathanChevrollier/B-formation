@@ -300,4 +300,22 @@ class Schedule {
         
         return $schedule;
     }
+
+    public static function getClassesByTeacher($teacher_id) {
+        $db = Database::getInstance();
+        $classIds = $db->fetchAll(
+            "SELECT DISTINCT class_id FROM schedule WHERE User_id = ?", 
+            [$teacher_id]
+        );
+        
+        $classes = [];
+        foreach ($classIds as $classId) {
+            $class = Classroom::findById($classId['class_id']);
+            if ($class) {
+                $classes[] = $class;
+            }
+        }
+        
+        return $classes;
+    }
 }

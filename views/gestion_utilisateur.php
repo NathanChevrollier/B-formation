@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION
 
 <div class="container">
     <h2 class="mb-4">Ajouter un Utilisateur</h2>
-    <form method="POST" action="assets/files/add_user.php" class="mb-4">
+    <form method="POST" action="user_controller.php" class="mb-4">
         <div class="row g-3">
             <div class="col-md-2">
                 <input type="text" name="surname" class="form-control" placeholder="Nom" required>
@@ -81,7 +81,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION
         <tbody>
             <?php foreach ($users as $user): ?>
             <tr id="user<?php echo $user['id']; ?>">
-                <form method="POST" action="assets/files/modify_users.php">
+                <form method="POST" action="user_controller.php">
                     <td>
                         <input type="text" name="surname" value="<?php echo $user['surname']; ?>" class="form-control">
                     </td>
