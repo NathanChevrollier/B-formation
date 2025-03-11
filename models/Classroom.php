@@ -92,7 +92,10 @@ class Classroom {
         
         $classes = [];
         foreach ($classesData as $classData) {
-            $classes[] = self::createFromArray($classData);
+            $classes[] = [
+                'id' => $classData['id'],
+                'name' => $classData['name']
+            ];
         }
         
         return $classes;

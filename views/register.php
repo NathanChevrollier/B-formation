@@ -13,7 +13,7 @@
 
     <img class="logo mb-3" src="../assets/imgs/logo.webp" alt="Logo" width="142 px" height="auto">
 
-    <form action="controllers/register_controller.php" method="post" class="login bg-white p-4 rounded shadow-sm w-100"
+    <form action="../register_controller.php" method="post" class="login bg-white p-4 rounded shadow-sm w-100"
         style="max-width: 330px;">
         <div class="mb-3">
             <label for="firstname" class="form-label">Prénom</label>

@@ -42,7 +42,8 @@ foreach ($teacherClasses as $class) {
     <div class="row">
         <div class="col-lg-6 col-md-12 mb-4">
             <h2>Cours du jour</h2>
-            <form method="POST" action="assets/files/teacher_tools.php">
+            <form method="POST" action="signature_controller.php">
+                <input type="hidden" name="action" value="registerForClass">
                 <button type="submit" class="btn btn-primary mb-3">Lancer la vérification des présences</button>
             </form>
             <table class="table table-striped">

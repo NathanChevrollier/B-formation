@@ -10,9 +10,12 @@ class Database {
     private $pdo;
     
     private function __construct() {
-        $dsn = "mysql:host=localhost;dbname=projet_1;charset=utf8";
-        $username = "Nathan";
-        $password = "@AsNath17";
+        $config = require(__DIR__ . '/config.php');
+        $dbConfig = $config['db'];
+        
+        $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['name']};charset=utf8";
+        $username = $dbConfig['user'];
+        $password = $dbConfig['pass'];
         
         try {
             $this->pdo = new PDO($dsn, $username, $password);

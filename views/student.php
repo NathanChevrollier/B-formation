@@ -49,12 +49,8 @@ $schedule = Schedule::findByClassId($user->getClassId());
                 <?php foreach ($schedule as $entry): ?>
                     <?php 
                         // Vérifier si une signature existe pour ce cours
-                        $sql = "SELECT status FROM signature WHERE User_id = :user_id AND Schedule_id = :schedule_id";
-                        $stmt = $pdo->prepare($sql);
-                        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':schedule_id', $entry['id'], PDO::PARAM_INT);
-                        $stmt->execute();
-                        $signature = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $signature = Signature::findByUserAndSchedule($user->getId(), $entry['id']);
+                        $status = $signature ? $signature->getStatus() : 'Non signé';
 
                         // Vérifier si une signature existe ou non
                         if ($signature) {
@@ -68,7 +64,8 @@ $schedule = Schedule::findByClassId($user->getClassId());
                         <h4 class="text-muted"><?php echo date("H:i", strtotime($entry['start_datetime'])); ?> - <?php echo date("H:i", strtotime($entry['end_datetime'])); ?></h4>
                         <p class="text-muted">Statut: <strong><?php echo ucfirst($status); ?></strong></p>
                         <?php if ($status === 'Non signé' || $status === 'pending'): ?>
-                            <form method="POST" action="assets/files/student_signature.php">
+                            <form method="POST" action="signature_controller.php">
+                                <input type="hidden" name="action" value="validateSignature">
                                 <button type="submit" class="btn btn-primary mt-3">Signer</button>
                             </form>
                         <?php else: ?>

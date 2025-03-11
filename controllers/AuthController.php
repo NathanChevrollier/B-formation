@@ -16,18 +16,18 @@ class AuthController {
             if ($email && $password) {
                 if (Auth::login($email, $password)) {
                     $userRole = Session::get('user_role');
-                    header("Location: $userRole.php");
+                    header("Location: views/$userRole.php");
                     exit();
                 } else {
                     // Échec de la connexion
                     Session::setFlash('error', 'Email ou mot de passe incorrect');
-                    header("Location: index.html");
+                    header("Location: ../index.html");
                     exit();
                 }
             } else {
                 // Champs manquants
                 Session::setFlash('error', 'Remplissez tous les champs');
-                header("Location: index.html");
+                header("Location: ../index.html");
                 exit();
             }
         }
@@ -74,7 +74,7 @@ class AuthController {
             
             // Rediriger vers la page de connexion
             Session::setFlash('success', 'Inscription réussie, vous pouvez vous connecter');
-            header("Location: index.html");
+            header("Location: ../index.html");
             exit();
         }
     }
@@ -82,7 +82,7 @@ class AuthController {
     // Déconnexion
     public function logout() {
         Auth::logout();
-        header("Location: index.html");
+        header("Location: ../index.html");
         exit();
     }
 }

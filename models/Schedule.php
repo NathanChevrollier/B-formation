@@ -209,7 +209,6 @@ class Schedule {
     public static function findTodayForTeacher($user_id) {
         $db = Database::getInstance();
         $today = date('Y-m-d');
-        
         $schedulesData = $db->fetchAll(
             "SELECT * FROM schedule 
             WHERE User_id = ? 
@@ -229,13 +228,12 @@ class Schedule {
     public static function findTodayForClass($class_id) {
         $db = Database::getInstance();
         $today = date('Y-m-d');
-        
         $schedulesData = $db->fetchAll(
             "SELECT * FROM schedule 
-            WHERE class_id = ? 
+            WHERE User_id = ? 
             AND DATE(start_datetime) = ? 
             ORDER BY start_datetime", 
-            [$class_id, $today]
+            [$user_id, $today]
         );
         
         $schedules = [];

@@ -5,13 +5,6 @@ use Models\Classroom;
 use Utils\Auth;
 use Utils\Session;
 
-session_start();
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || $_SESSION['user_role'] !== 'admin') {
-    header("Location: index.html");
-    exit();
-}
-
-
 ?>
 
 <!DOCTYPE html>
