@@ -75,7 +75,7 @@ use Utils\Session;
                     </span>
                 </td>
                 <td>
-                    <form method="POST" class="d-inline">
+                    <form method="POST" action="signature_controller.php" class="d-inline">
                         <input type="hidden" name="action" value="edit">
                         <input type="hidden" name="signature_id" value="<?= $row['signature_id']; ?>">
                         <select name="status" class="form-select d-inline w-auto">
@@ -84,7 +84,7 @@ use Utils\Session;
                         </select>
                         <button type="submit" class="btn btn-warning btn-sm">Modifier</button>
                     </form>
-                    <form method="POST" class="d-inline">
+                    <form method="POST" action="signature_controller.php" class="d-inline">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="signature_id" value="<?= $row['signature_id']; ?>">
                         <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>

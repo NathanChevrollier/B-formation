@@ -8,7 +8,7 @@ Auth::requireRole('student');
 $user = Auth::getUser();
 $user_name = $user->getFirstname() . ' ' . $user->getSurname();
 
-$class = $user->getClass();
+$class = $user->getClassId();
 $class_name = $class ? $class->getName() : 'Non attribuée';
 
 // Récupérer l'emploi du temps
@@ -52,12 +52,6 @@ $schedule = Schedule::findByClassId($user->getClassId());
                         $signature = Signature::findByUserAndSchedule($user->getId(), $entry['id']);
                         $status = $signature ? $signature->getStatus() : 'Non signé';
 
-                        // Vérifier si une signature existe ou non
-                        if ($signature) {
-                            $status = $signature['status'] ?? 'pending';
-                        } else {
-                            $status = 'Non signé';
-                        }
                     ?>
                     <div class="card text-center mx-auto" style="width: 100%; max-width: 200px;">
                         <h3><?php echo htmlspecialchars($entry['subject_name']); ?></h3>

@@ -51,7 +51,7 @@ use Utils\Session;
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $row['schedule_id']; ?>">Modifier</button>
 
                     <!-- Formulaire pour supprimer -->
-                    <form method="POST" class="d-inline">
+                    <form method="POST" action="schedule_controller.php" class="d-inline">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="schedule_id" value="<?= $row['schedule_id']; ?>">
                         <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
@@ -118,7 +118,7 @@ use Utils\Session;
 
     <!-- Formulaire pour ajouter un emploi du temps -->
     <h3 class="mt-4">Ajouter un Emploi du Temps</h3>
-    <form method="POST">
+    <form method="POST" action="schedule_controller.php">
         <input type="hidden" name="action" value="add">
         <div class="mb-3">
             <label for="class_id" class="form-label">Classe</label>

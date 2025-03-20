@@ -230,10 +230,10 @@ class Schedule {
         $today = date('Y-m-d');
         $schedulesData = $db->fetchAll(
             "SELECT * FROM schedule 
-            WHERE User_id = ? 
+            WHERE class_id = ? 
             AND DATE(start_datetime) = ? 
             ORDER BY start_datetime", 
-            [$user_id, $today]
+            [$class_id, $today]
         );
         
         $schedules = [];

@@ -52,7 +52,7 @@ use Utils\Session;
             <tr>
                 <form method="POST" action="subject_controller.php">
                     <td>
-                        <input type="text" name="subject_name" value="<?php echo $subject['name']; ?>" class="form-control">
+                        <input type="text" name="subject_name" value="<?php echo $subject->getName(); ?>" class="form-control">
                     </td>
                     <td>
                         <input type="hidden" name="subject_id" value="<?php echo $subject['id']; ?>">
