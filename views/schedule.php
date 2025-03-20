@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config/autoload.php';
+require_once '../utils/verif.php';
 use Models\User;
 use Models\Classroom;
 use Utils\Auth;

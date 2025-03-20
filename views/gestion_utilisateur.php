@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config/autoload.php';
+require_once '../utils/verif.php';
 use Models\User;
 use Models\Classroom;
 use Utils\Auth;
@@ -76,13 +77,13 @@ use Utils\Session;
             <tr id="user<?php echo $user['id']; ?>">
                 <form method="POST" action="user_controller.php">
                     <td>
-                        <input type="text" name="surname" value="<?php echo $user['surname']; ?>" class="form-control">
+                        <input type="text" name="surname" value="<?php echo $user->getSurname(); ?>" class="form-control">
                     </td>
                     <td>
-                        <input type="text" name="firstname" value="<?php echo $user['firstname']; ?>" class="form-control">
+                        <input type="text" name="firstname" value="<?php echo $user->getFirstname(); ?>" class="form-control">
                     </td>
                     <td>
-                        <input type="email" name="email" value="<?php echo $user['email']; ?>" class="form-control">
+                        <input type="email" name="email" value="<?php echo $user->getEmail(); ?>" class="form-control">
                     </td>
                     <td>
                         <select name="role" class="form-select">

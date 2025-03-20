@@ -1,5 +1,6 @@
 <?php
 require_once 'config/autoload.php';
+require_once '../utils/verif.php';
 use Models\User;
 use Models\Classroom;
 use Utils\Auth;
@@ -50,7 +51,7 @@ use Utils\Session;
             <tr>
                 <form method="POST" action="class_controller.php">
                     <td>
-                        <input type="text" name="class_name" value="<?php echo $subject->getName(); ?>" class="form-control">
+                        <input type="text" name="class_name" value="<?php echo $class['name']; ?>" class="form-control">
                     </td>
                     <td>
                         <input type="hidden" name="class_id" value="<?php echo $class['id']; ?>">

@@ -11,7 +11,7 @@ class Signature {
     private $schedule_id;
     private $status;
     
-    // Constantes pour les statuts
+    // Statuts
     const STATUS_PENDING = 'pending';
     const STATUS_VALIDATED = 'validated';
     

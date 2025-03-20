@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/autoload.php';
+require_once '../utils/verif.php';
 use Utils\Auth;
 
 Auth::requireRole('admin');
@@ -21,7 +22,7 @@ $user_name = $user->getEmail();
         <div class="container text-center">
             <h1 class="mb-2">Panneau d'administration</h1>
             <p class="mb-2">Connecté en tant que <strong><?php echo htmlspecialchars($user_name); ?></strong></p>
-            <a href="index.html" class="btn btn-outline-light">Déconnexion</a>
+            <a href="../utils/logout.php" class="btn btn-outline-light">Déconnexion</a>
         </div>
     </header>
 

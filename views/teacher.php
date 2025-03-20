@@ -1,5 +1,6 @@
 <?php
 require_once 'config/autoload.php';
+require_once '../utils/verif.php';
 use Utils\Auth;
 use Models\Schedule;
 

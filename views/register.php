@@ -45,7 +45,7 @@
         <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
 
         <div class="form-login mt-3 text-center">
-            <a href="index.html" target="_self">Connectez-vous</a>
+            <a href="../index.html" target="_self">Connectez-vous</a>
         </div>
 
         <p class="mt-4 text-muted text-center">© 2017–2024</p>

@@ -1,5 +1,6 @@
 <?php
 require_once 'config/autoload.php';
+require_once '../utils/verif.php';
 use Utils\Auth;
 use Models\Schedule;
 use Models\Signature;
@@ -8,7 +9,7 @@ Auth::requireRole('student');
 $user = Auth::getUser();
 $user_name = $user->getFirstname() . ' ' . $user->getSurname();
 
-$class = $user->getClassId();
+$class = $user->getClass();
 $class_name = $class ? $class->getName() : 'Non attribuée';
 
 // Récupérer l'emploi du temps

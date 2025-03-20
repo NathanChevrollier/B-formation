@@ -1,7 +1,7 @@
 <?php
 
 require_once 'config/autoload.php';
-
+require_once '../utils/verif.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
                     <a class="nav-link text-white" href="schedule.php">Emploi du temps</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="index.html">Déconnexion</a>
+                    <a class="nav-link text-white" href="../utils/logout.php">Déconnexion</a>
                 </li>
             </ul>
         </div>

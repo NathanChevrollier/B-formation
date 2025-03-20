@@ -1,5 +1,6 @@
 <?php 
 require_once 'config/autoload.php';
+require_once '../utils/verif.php';
 use Models\User;
 use Models\Classroom;
 use Utils\Auth;
@@ -76,7 +77,7 @@ use Utils\Session;
                 </td>
                 <td>
                     <form method="POST" action="signature_controller.php" class="d-inline">
-                        <input type="hidden" name="action" value="edit">
+                        <input type="hidden" name="action" value="update">
                         <input type="hidden" name="signature_id" value="<?= $row['signature_id']; ?>">
                         <select name="status" class="form-select d-inline w-auto">
                             <option value="pending" <?= $row['status'] === 'pending' ? 'selected' : ''; ?>>En attente</option>

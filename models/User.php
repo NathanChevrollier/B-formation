@@ -76,6 +76,13 @@ class User {
     public function getClassId() {
         return $this->class_id;
     }
+
+    public function getClass() {
+        if (!$this->class_id) {
+            return null;
+        }
+        return Classroom::findById($this->class_id);
+    }
     
     public function setClassId($class_id) {
         $this->class_id = $class_id;
