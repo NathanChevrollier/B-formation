@@ -140,23 +140,21 @@ class ScheduleController {
     
     // Récupérer les données complètes de l'emploi du temps
     private function getFullPlanningData() {
-        $db = Database::getInstance()->getConnection();
-        $sql = "
-            SELECT DISTINCT
-                s.id AS schedule_id, 
-                c.name AS class_name, 
-                sub.name AS subject_name, 
-                s.start_datetime, 
-                s.end_datetime, 
-                u.email AS teacher_name
-            FROM schedule s
-            JOIN class c ON s.class_id = c.id
-            JOIN subject sub ON s.subject_id = sub.id
-            JOIN user u ON s.User_id = u.id
-        ";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $schedules = Schedule::findAll();
+        $result = [];
+        
+        foreach ($schedules as $schedule) {
+            $result[] = [
+                'schedule_id' => $schedule->getId(),
+                'class_name' => $schedule->getClass()->getName(),
+                'subject_name' => $schedule->getSubject()->getName(),
+                'start_datetime' => $schedule->getStartDatetime(),
+                'end_datetime' => $schedule->getEndDatetime(),
+                'teacher_name' => $schedule->getTeacher()->getEmail()
+            ];
+        }
+        
+        return $result;
     }
     
     // Récupérer les données de l'emploi du temps d'un étudiant

@@ -16,7 +16,13 @@ class AuthController {
             if ($email && $password) {
                 if (Auth::login($email, $password)) {
                     $userRole = Session::get('user_role');
-                    header("Location: views/$userRole.php");
+                    $validRoles = ['admin', 'teacher', 'student'];
+                    if (in_array($userRole, $validRoles)) {
+                        header("Location: views/$userRole.php");
+                    } else {
+                        // Rôle non valide, redirection par défaut
+                        header("Location: ../index.html");
+                    }
                     exit();
                 } else {
                     // Échec de la connexion

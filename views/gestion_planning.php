@@ -126,7 +126,7 @@ use Utils\Session;
             <select id="class_id" name="class_id" class="form-select" required>
                 <option value="">Sélectionnez une classe</option>
                 <?php foreach ($classes as $class): ?>
-                    <option value="<?= $class['id']; ?>"><?= htmlspecialchars($class['name']); ?></option>
+                    <option value="<?= $class->getId(); ?>"><?= htmlspecialchars($class->getName()); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -135,7 +135,7 @@ use Utils\Session;
             <select id="subject_id" name="subject_id" class="form-select" required>
                 <option value="">Sélectionnez une matière</option>
                 <?php foreach ($subjects as $subject): ?>
-                    <option value="<?= $subject['id']; ?>"><?= htmlspecialchars($subject['name']); ?></option>
+                    <option value="<?= $subject->getId(); ?>"><?= htmlspecialchars($subject->getName()); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -144,7 +144,7 @@ use Utils\Session;
             <select id="teacher_id" name="teacher_id" class="form-select" required>
                 <option value="">Sélectionnez un professeur</option>
                 <?php foreach ($teachers as $teacher): ?>
-                    <option value="<?= $teacher['id']; ?>"><?= htmlspecialchars($teacher['email']); ?></option>
+                    <option value="<?= $teacher->getId(); ?>"><?= htmlspecialchars($teacher->getName()); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
