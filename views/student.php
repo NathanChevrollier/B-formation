@@ -1,6 +1,6 @@
 <?php
-require_once 'config/autoload.php';
-require_once '../utils/verif.php';
+require_once __DIR__ . '/../config/autoload.php';
+require_once __DIR__ . '/../utils/verif.php';
 use Utils\Auth;
 use Models\Schedule;
 use Models\Signature;

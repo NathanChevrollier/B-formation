@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/autoload.php';
-require_once '../utils/verif.php';
+require_once __DIR__ . '/../utils/verif.php';
 use Utils\Auth;
 
 Auth::requireRole('admin');
@@ -58,7 +58,7 @@ $user_name = $user->getEmail();
                     <div class="card-body">
                         <h3 class="card-title">Gestion des matières</h3>
                         <p class="card-text">Gérez les Cours enseignées et associez-les aux différents enseignants et classes.</p><br>
-                        <a href="gestion_matières.php" class="btn btn-primary w-100">Gérer les matières</a>
+                        <a href="gestion_matieres.php" class="btn btn-primary w-100">Gérer les matières</a>
                     </div>
                 </div>
             </div>

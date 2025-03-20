@@ -1,7 +1,7 @@
 <?php
 
-require_once 'config/autoload.php';
-require_once '../utils/verif.php';
+require_once __DIR__ . '/../config/autoload.php';
+require_once __DIR__ . '/../utils/verif.php';
 use Models\User;
 use Models\Classroom;
 use Utils\Auth;

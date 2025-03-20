@@ -42,7 +42,7 @@ class SignatureController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: gestion_signature.php");
+            header("Location: ../views/gestion_signature.php");
             exit();
         }
     }
@@ -70,7 +70,7 @@ class SignatureController {
                 Session::setFlash('error', 'Données invalides.');
             }
             
-            header("Location: gestion_signature.php");
+            header("Location: ../views/gestion_signature.php");
             exit();
         }
     }
@@ -95,7 +95,7 @@ class SignatureController {
                 Session::setFlash('error', 'ID de signature manquant.');
             }
             
-            header("Location: gestion_signature.php");
+            header("Location: ../views/gestion_signature.php");
             exit();
         }
     }

@@ -72,7 +72,7 @@ class ScheduleController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: gestion_planning.php");
+            header("Location: ../views/gestion_planning.php");
             exit();
         }
     }
@@ -108,7 +108,7 @@ class ScheduleController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: gestion_planning.php");
+            header("Location: ../views/gestion_planning.php");
             exit();
         }
     }
@@ -133,7 +133,7 @@ class ScheduleController {
                 Session::setFlash('error', 'ID d\'emploi du temps manquant.');
             }
             
-            header("Location: gestion_planning.php");
+            header("Location: ../views/gestion_planning.php");
             exit();
         }
     }

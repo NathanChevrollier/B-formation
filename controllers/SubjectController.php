@@ -29,11 +29,11 @@ class SubjectController {
                 $subject->setName($subject_name);
                 $subject->save();
                 
-                header("Location: gestion_matières.php");
+                header("Location: ../views/gestion_matières.php");
                 exit();
             } else {
                 Session::setFlash('error', 'Le nom de la matière est requis.');
-                header("Location: gestion_matières.php");
+                header("Location: ../views/gestion_matières.php");
                 exit();
             }
         }
@@ -62,7 +62,7 @@ class SubjectController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: gestion_matières.php");
+            header("Location: ../views/gestion_matières.php");
             exit();
         }
     }
@@ -90,7 +90,7 @@ class SubjectController {
                 Session::setFlash('error', 'ID de matière manquant.');
             }
             
-            header("Location: gestion_matières.php");
+            header("Location: ../views/gestion_matières.php");
             exit();
         }
     }

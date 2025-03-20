@@ -43,11 +43,11 @@ class UserController {
                      ->setClassId($class_id)
                      ->save();
                 
-                header("Location: gestion_utilisateur.php");
+                header("Location: ../views/gestion_utilisateur.php");
                 exit();
             } else {
                 Session::setFlash('error', 'Tous les champs sont requis.');
-                header("Location: gestion_utilisateur.php");
+                header("Location: ../views/gestion_utilisateur.php");
                 exit();
             }
         }
@@ -93,7 +93,7 @@ class UserController {
                 Session::setFlash('error', 'ID d\'utilisateur manquant.');
             }
             
-            header("Location: gestion_utilisateur.php");
+            header("Location: ../views/gestion_utilisateur.php");
             exit();
         }
     }
@@ -118,7 +118,7 @@ class UserController {
                 Session::setFlash('error', 'ID d\'utilisateur manquant.');
             }
             
-            header("Location: gestion_utilisateur.php");
+            header("Location: ../views/gestion_utilisateur.php");
             exit();
         }
     }

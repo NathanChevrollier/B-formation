@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `class`
 --
 
-CREATE TABLE `class` (
+CREATE TABLE `classroom` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -139,7 +139,7 @@ INSERT INTO `user` (`id`, `firstname`, `surname`, `email`, `password`, `role`, `
 --
 -- Index pour la table `class`
 --
-ALTER TABLE `class`
+ALTER TABLE `classroom`
   ADD PRIMARY KEY (`id`);
 
 --

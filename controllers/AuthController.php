@@ -46,20 +46,20 @@ class AuthController {
             // Vérification des champs
             if (!$firstname || !$surname || !$email || !$password) {
                 Session::setFlash('error', 'Tous les champs sont obligatoires');
-                header("Location: register.html");
+                header("Location: ../views/register.php");
                 exit();
             }
             
             if ($password !== $confirmPassword) {
                 Session::setFlash('error', 'Les mots de passe ne correspondent pas');
-                header("Location: register.html");
+                header("Location: ../views/register.php");
                 exit();
             }
             
             // Vérifier si l'email est déjà utilisé
             if (User::findByEmail($email)) {
                 Session::setFlash('error', 'Cet email est déjà utilisé');
-                header("Location: register.html");
+                header("Location: ../views/register.php");
                 exit();
             }
             
