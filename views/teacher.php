@@ -58,9 +58,9 @@ foreach ($teacherClasses as $class) {
                 <tbody>
                     <?php foreach ($schedule as $entry): ?>
                         <tr>
-                            <td><?php echo date("H:i", strtotime($entry['start_datetime'])); ?> - <?php echo date("H:i", strtotime($entry['end_datetime'])); ?></td>
-                            <td><?php echo htmlspecialchars($entry['class_name']); ?></td>
-                            <td><?php echo htmlspecialchars($entry['subject_name']); ?></td>
+                            <td><?php echo date("H:i", strtotime($entry->getStartDatetime())); ?> - <?php echo date("H:i", strtotime($entry->getEndDatetime())); ?></td>
+                            <td><?php echo htmlspecialchars($entry->getClass()->getName()); ?></td>
+                            <td><?php echo htmlspecialchars($entry->getSubject()->getName()); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

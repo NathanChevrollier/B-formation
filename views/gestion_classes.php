@@ -51,10 +51,10 @@ use Utils\Session;
             <tr>
                 <form method="POST" action="class_controller.php">
                     <td>
-                        <input type="text" name="class_name" value="<?php echo $class['name']; ?>" class="form-control">
+                        <input type="text" name="class_name" value="<?php echo $class->getName(); ?>" class="form-control">
                     </td>
                     <td>
-                        <input type="hidden" name="class_id" value="<?php echo $class['id']; ?>">
+                        <input type="hidden" name="class_id" value="<?php echo $class->getId(); ?>">
                         <button type="submit" name="action" value="update" class="btn btn-success btn-sm">Modifier</button>
                         <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">Supprimer</button>
                     </td>

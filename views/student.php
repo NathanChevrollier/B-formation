@@ -50,13 +50,15 @@ $schedule = Schedule::findByClassId($user->getClassId());
                 <?php foreach ($schedule as $entry): ?>
                     <?php 
                         // Vérifier si une signature existe pour ce cours
-                        $signature = Signature::findByUserAndSchedule($user->getId(), $entry['id']);
+                        $signature = Signature::findByUserAndSchedule($user->getId(), $entry->getId());
                         $status = $signature ? $signature->getStatus() : 'Non signé';
-
                     ?>
                     <div class="card text-center mx-auto" style="width: 100%; max-width: 200px;">
-                        <h3><?php echo htmlspecialchars($entry['subject_name']); ?></h3>
-                        <h4 class="text-muted"><?php echo date("H:i", strtotime($entry['start_datetime'])); ?> - <?php echo date("H:i", strtotime($entry['end_datetime'])); ?></h4>
+                        <h3><?php echo htmlspecialchars($entry->getSubject()->getName()); ?></h3>
+                        <h4 class="text-muted">
+                            <?php echo date("H:i", strtotime($entry->getStartDatetime())); ?> - 
+                            <?php echo date("H:i", strtotime($entry->getEndDatetime())); ?>
+                        </h4>
                         <p class="text-muted">Statut: <strong><?php echo ucfirst($status); ?></strong></p>
                         <?php if ($status === 'Non signé' || $status === 'pending'): ?>
                             <form method="POST" action="signature_controller.php">

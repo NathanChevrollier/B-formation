@@ -36,7 +36,7 @@ use Utils\Session;
             <select name="user_id" id="user_id" class="form-select" required>
                 <option value="">Sélectionner un élève</option>
                 <?php foreach ($students as $student): ?>
-                    <option value="<?= $student['id']; ?>"><?= htmlspecialchars($student['email']); ?></option>
+                    <option value="<?= $student->getId(); ?>"><?= htmlspecialchars($student->getEmail()); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -45,7 +45,7 @@ use Utils\Session;
             <select name="schedule_id" id="schedule_id" class="form-select" required>
                 <option value="">Sélectionner un cours</option>
                 <?php foreach ($schedules as $schedule): ?>
-                    <option value="<?= $schedule['id']; ?>"><?= htmlspecialchars($schedule['start_datetime']); ?></option>
+                    <option value="<?= $schedule->getId(); ?>"><?= htmlspecialchars($schedule->getStartDatetime()); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

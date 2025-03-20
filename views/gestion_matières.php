@@ -53,10 +53,10 @@ use Utils\Session;
             <tr>
                 <form method="POST" action="subject_controller.php">
                     <td>
-                        <input type="text" name="subject_id" value="<?php echo $subject->getId(); ?>">
+                        <input type="text" name="subject_name" value="<?php echo $subject->getName(); ?>" class="form-control">
                     </td>
                     <td>
-                        <input type="hidden" name="subject_id" value="<?php echo $subject['id']; ?>">
+                        <input type="hidden" name="subject_id" value="<?php echo $subject->getId(); ?>">
                         <button type="submit" name="action" value="update" class="btn btn-success btn-sm">Modifier</button>
                         <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">Supprimer</button>
                     </td>

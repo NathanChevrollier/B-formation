@@ -87,23 +87,23 @@ use Utils\Session;
                     </td>
                     <td>
                         <select name="role" class="form-select">
-                            <option value="admin" <?php if ($user['role'] === 'admin') echo 'selected'; ?>>Admin</option>
-                            <option value="student" <?php if ($user['role'] === 'student') echo 'selected'; ?>>Student</option>
-                            <option value="teacher" <?php if ($user['role'] === 'teacher') echo 'selected'; ?>>Teacher</option>
+                            <option value="admin" <?php if ($user->getRole() === 'admin') echo 'selected'; ?>>Admin</option>
+                            <option value="student" <?php if ($user->getRole() === 'student') echo 'selected'; ?>>Student</option>
+                            <option value="teacher" <?php if ($user->getRole() === 'teacher') echo 'selected'; ?>>Teacher</option>
                         </select>
                     </td>
                     <td>
                         <select name="class_id" class="form-select">
-                            <option value="" <?php if (is_null($user['class_id'])) echo 'selected'; ?>>Aucune</option>
+                            <option value="" <?php if (is_null($user->getClassId())) echo 'selected'; ?>>Aucune</option>
                             <?php foreach ($classes as $class): ?>
-                                <option value="<?php echo $class['id']; ?>" <?php if ($user['class_id'] == $class['id']) echo 'selected'; ?>>
-                                    <?php echo $class['name']; ?>
+                                <option value="<?php echo $class->getId(); ?>" <?php if ($user->getClassId() == $class->getId()) echo 'selected'; ?>>
+                                    <?php echo $class->getName(); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
                     </td>
                     <td>
-                        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
                         <button type="submit" name="action" value="update" class="btn btn-success btn-sm">Modifier</button>
                         <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">Supprimer</button>
                     </td>

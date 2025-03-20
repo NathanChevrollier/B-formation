@@ -74,7 +74,7 @@ use Utils\Session;
                                             <label for="class_id" class="form-label">Classe</label>
                                             <select id="class_id" name="class_id" class="form-select" required>
                                                 <?php foreach ($classes as $class): ?>
-                                                    <option value="<?= $class['id']; ?>" <?= $class['id'] == $row['class_name'] ? 'selected' : ''; ?>><?= htmlspecialchars($class['name']); ?></option>
+                                                    <option value="<?= $class->getId(); ?>" <?= $class->getId() == $row['class_id'] ? 'selected' : ''; ?>><?= htmlspecialchars($class->getName()); ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -82,7 +82,7 @@ use Utils\Session;
                                             <label for="subject_id" class="form-label">Matière</label>
                                             <select id="subject_id" name="subject_id" class="form-select" required>
                                                 <?php foreach ($subjects as $subject): ?>
-                                                    <option value="<?= $subject['id']; ?>" <?= $subject['id'] == $row['subject_name'] ? 'selected' : ''; ?>><?= htmlspecialchars($subject['name']); ?></option>
+                                                    <option value="<?= $subject->getId(); ?>" <?= $subject->getId() == $row['subject_id'] ? 'selected' : ''; ?>><?= htmlspecialchars($subject->getName()); ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -90,7 +90,7 @@ use Utils\Session;
                                             <label for="teacher_id" class="form-label">Professeur</label>
                                             <select id="teacher_id" name="teacher_id" class="form-select" required>
                                                 <?php foreach ($teachers as $teacher): ?>
-                                                    <option value="<?= $teacher['id']; ?>" <?= $teacher['id'] == $row['teacher_name'] ? 'selected' : ''; ?>><?= htmlspecialchars($teacher['email']); ?></option>
+                                                    <option value="<?= $teacher->getId(); ?>" <?= $teacher->getId() == $row['user_id'] ? 'selected' : ''; ?>><?= htmlspecialchars($teacher->getEmail()); ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
