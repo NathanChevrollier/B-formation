@@ -30,6 +30,14 @@ class UserController {
             $role = $_POST['role'] ?? '';
             $class_id = $_POST['class_id'] ?? null;
             
+            //  mot de passe depuis formulaire
+            $password = $_POST['password'] ?? '';
+            
+            // mdp défaut si vide
+            if (empty($password)) {
+                $password = "password123"; // Mot de passe par défaut
+            }
+            
             if (empty($class_id)) {
                 $class_id = null;
             }
@@ -41,13 +49,14 @@ class UserController {
                      ->setEmail($email)
                      ->setRole($role)
                      ->setClassId($class_id)
+                     ->setPassword($password) // Utilise le mot de passe du formulaire
                      ->save();
                 
-                header("Location: ../views/gestion_utilisateur.php");
+                header("Location: views/gestion_utilisateur.php");
                 exit();
             } else {
                 Session::setFlash('error', 'Tous les champs sont requis.');
-                header("Location: ../views/gestion_utilisateur.php");
+                header("Location: views/gestion_utilisateur.php");
                 exit();
             }
         }

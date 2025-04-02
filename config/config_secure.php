@@ -1,4 +1,3 @@
-// config/config_secure.php (à ajouter à .gitignore)
 <?php
 return [
     'db_host' => 'localhost',

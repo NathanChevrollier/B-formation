@@ -1,11 +1,28 @@
-<?php 
+<?php
 require_once __DIR__ . '/../config/autoload.php';
 require_once __DIR__ . '/../utils/verif.php';
+use Models\Signature;
+use Models\Schedule;
 use Models\User;
-use Models\Classroom;
 use Utils\Auth;
-use Utils\Session;
+use Config\Database;
 
+Auth::requireRole('admin');
+
+// initialisation les signatures avec les utilisateurs, cours,
+$db = Database::getInstance();
+$signatures = $db->fetchAll("
+    SELECT sig.id AS signature_id, u.email AS student_name, c.name AS class_name, 
+           sub.name AS subject_name, s.start_datetime, s.end_datetime, sig.status
+    FROM signature sig
+    JOIN user u ON sig.User_id = u.id
+    JOIN schedule s ON sig.Schedule_id = s.id
+    JOIN class c ON s.class_id = c.id
+    JOIN subject sub ON s.Subject_id = sub.id
+    ORDER BY s.start_datetime DESC
+");
+$students = User::findByRole('student');
+$schedules = Schedule::findAll();
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +38,7 @@ use Utils\Session;
 <header class="bg-secondary text-white py-3 mb-4">
     <div class="container text-center">
         <h1 class="mb-2">Gestion des Signatures de Présence</h1>
-        <a href="admin.php" class="btn btn-outline-light">Retour à l'Accueil Admin</a>
+        <a href="/b-formation/views/admin.php" class="btn btn-outline-light">Retour à l'Accueil Admin</a>
     </div>
 </header>
 

@@ -1,10 +1,28 @@
 <?php
 require_once __DIR__ . '/../config/autoload.php';
 require_once __DIR__ . '/../utils/verif.php';
-use Models\User;
+use Models\Schedule;
 use Models\Classroom;
+use Models\Subject;
+use Models\User;
 use Utils\Auth;
-use Utils\Session;
+use Config\Database;
+
+Auth::requireRole('admin');
+
+// initialiser les utilisateurs avec leurs classes, matières et emplois du temps
+$db = Database::getInstance();
+$planning = $db->fetchAll("
+    SELECT s.id as schedule_id, c.name as class_name, sub.name as subject_name, 
+           s.start_datetime, s.end_datetime, u.email as teacher_name
+    FROM schedule s
+    JOIN class c ON s.class_id = c.id
+    JOIN subject sub ON s.Subject_id = sub.id
+    JOIN user u ON s.User_id = u.id
+");
+$classes = Classroom::findAll();
+$subjects = Subject::findAll();
+$teachers = User::findByRole('teacher');
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +38,7 @@ use Utils\Session;
 <header class="bg-secondary text-white py-3 mb-4">
     <div class="container text-center">
         <h1 class="mb-2">Gestion des Emplois du Temps</h1>
-        <a href="admin.php" class="btn btn-outline-light">Retour à l'Accueil Admin</a>
+        <a href="/b-formation/views/admin.php" class="btn btn-outline-light">Retour à l'Accueil Admin</a>
     </div>
 </header>
 

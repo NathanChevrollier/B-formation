@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `class`
 --
 
-CREATE TABLE `classroom` (
+CREATE TABLE `class` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -18,7 +18,7 @@ class AuthController {
                     $userRole = Session::get('user_role');
                     $validRoles = ['admin', 'teacher', 'student'];
                     if (in_array($userRole, $validRoles)) {
-                        header("Location: views/$userRole.php");
+                        header("Location: $userRole.php");
                     } else {
                         // Rôle non valide, redirection par défaut
                         header("Location: ../index.html");
