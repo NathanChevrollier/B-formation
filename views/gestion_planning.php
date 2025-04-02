@@ -13,8 +13,16 @@ Auth::requireRole('admin');
 // initialiser les utilisateurs avec leurs classes, matières et emplois du temps
 $db = Database::getInstance();
 $planning = $db->fetchAll("
-    SELECT s.id as schedule_id, c.name as class_name, sub.name as subject_name, 
-           s.start_datetime, s.end_datetime, u.email as teacher_name
+    SELECT 
+        s.id as schedule_id, 
+        c.id as class_id, 
+        sub.id as subject_id, 
+        u.id as user_id,
+        c.name as class_name, 
+        sub.name as subject_name, 
+        s.start_datetime, 
+        s.end_datetime, 
+        u.email as teacher_name
     FROM schedule s
     JOIN class c ON s.class_id = c.id
     JOIN subject sub ON s.Subject_id = sub.id
@@ -86,7 +94,7 @@ $teachers = User::findByRole('teacher');
                                 </div>
                                 <form method="POST" action="schedule_controller.php">
                                     <div class="modal-body">
-                                        <input type="hidden" name="action" value="edit">
+                                        <input type="hidden" name="action" value="update">
                                         <input type="hidden" name="schedule_id" value="<?= $row['schedule_id']; ?>">
                                         <div class="mb-3">
                                             <label for="class_id" class="form-label">Classe</label>
@@ -162,7 +170,7 @@ $teachers = User::findByRole('teacher');
             <select id="teacher_id" name="teacher_id" class="form-select" required>
                 <option value="">Sélectionnez un professeur</option>
                 <?php foreach ($teachers as $teacher): ?>
-                    <option value="<?= $teacher->getId(); ?>"><?= htmlspecialchars($teacher->getName()); ?></option>
+                    <option value="<?= $teacher->getId(); ?>"><?= htmlspecialchars($teacher->getEmail()); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

@@ -87,8 +87,10 @@ class AuthController {
     
     // Déconnexion
     public function logout() {
-        Auth::logout();
-        header("Location: ../index.html");
+
+        Session::destroy();
+        
+        header("Location: /b-formation/index.php");
         exit();
     }
 }

@@ -14,7 +14,7 @@ class SubjectController {
         $subjects = Subject::findAll();
         
         // Inclure la vue
-        include 'views/gestion_matières.php';
+        include __DIR__ . '/../views/gestion_matieres.php';
     }
     
     // Ajouter une matière
@@ -29,11 +29,11 @@ class SubjectController {
                 $subject->setName($subject_name);
                 $subject->save();
                 
-                header("Location: ../views/gestion_matières.php");
+                header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             } else {
                 Session::setFlash('error', 'Le nom de la matière est requis.');
-                header("Location: ../views/gestion_matières.php");
+                header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             }
         }
@@ -62,7 +62,7 @@ class SubjectController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: ../views/gestion_matières.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -90,7 +90,7 @@ class SubjectController {
                 Session::setFlash('error', 'ID de matière manquant.');
             }
             
-            header("Location: ../views/gestion_matières.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }

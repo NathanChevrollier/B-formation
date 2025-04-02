@@ -52,11 +52,11 @@ class UserController {
                      ->setPassword($password) // Utilise le mot de passe du formulaire
                      ->save();
                 
-                header("Location: views/gestion_utilisateur.php");
+                header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             } else {
                 Session::setFlash('error', 'Tous les champs sont requis.');
-                header("Location: views/gestion_utilisateur.php");
+                header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             }
         }
@@ -102,7 +102,7 @@ class UserController {
                 Session::setFlash('error', 'ID d\'utilisateur manquant.');
             }
             
-            header("Location: ../views/gestion_utilisateur.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -127,7 +127,7 @@ class UserController {
                 Session::setFlash('error', 'ID d\'utilisateur manquant.');
             }
             
-            header("Location: ../views/gestion_utilisateur.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }

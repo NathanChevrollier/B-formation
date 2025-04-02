@@ -72,7 +72,7 @@ class ScheduleController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: ../views/gestion_planning.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -108,7 +108,7 @@ class ScheduleController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: ../views/gestion_planning.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -133,7 +133,7 @@ class ScheduleController {
                 Session::setFlash('error', 'ID d\'emploi du temps manquant.');
             }
             
-            header("Location: ../views/gestion_planning.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }

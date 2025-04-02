@@ -12,8 +12,20 @@ $user_name = $user->getFirstname() . ' ' . $user->getSurname();
 $class = $user->getClass();
 $class_name = $class ? $class->getName() : 'Non attribuée';
 
+// Avant la récupération des cours
+$classId = $user->getClassId();
+error_log("ID de classe de l'utilisateur : " . ($classId ?? 'NULL'));
+
+$schedule = Schedule::findTodayForClass($classId);
+
+// Vérification détaillée
+error_log("Nombre de cours récupérés : " . count($schedule));
+if (empty($schedule)) {
+    error_log("Aucun cours trouvé pour la classe avec l'ID : " . $classId);
+}
+
 // Récupérer l'emploi du temps
-$schedule = Schedule::findByClassId($user->getClassId());
+$schedule = Schedule::findTodayForClass($user->getClassId());
 
 ?>
 
@@ -61,8 +73,9 @@ $schedule = Schedule::findByClassId($user->getClassId());
                         </h4>
                         <p class="text-muted">Statut: <strong><?php echo ucfirst($status); ?></strong></p>
                         <?php if ($status === 'Non signé' || $status === 'pending'): ?>
-                            <form method="POST" action="signature_controller.php">
+                            <form method="POST" action="../signature_controller.php">
                                 <input type="hidden" name="action" value="validateSignature">
+                                <input type="hidden" name="schedule_id" value="<?= $entry->getId(); ?>">
                                 <button type="submit" class="btn btn-primary mt-3">Signer</button>
                             </form>
                         <?php else: ?>

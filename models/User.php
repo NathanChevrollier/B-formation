@@ -74,6 +74,7 @@ class User {
     }
     
     public function getClassId() {
+        error_log("Récupération de l'ID de classe : " . ($this->class_id ?? 'NULL'));
         return $this->class_id;
     }
 

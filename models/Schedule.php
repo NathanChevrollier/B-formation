@@ -226,16 +226,36 @@ class Schedule {
     }
     
     public static function findTodayForClass($class_id) {
+        // Vérification de l'ID de classe
+        if ($class_id === null) {
+            error_log("Erreur : ID de classe est null");
+            return [];
+        }
+    
         $db = Database::getInstance();
         $today = date('Y-m-d');
-        $schedulesData = $db->fetchAll(
-            "SELECT * FROM schedule 
-            WHERE class_id = ? 
-            AND DATE(start_datetime) = ? 
-            ORDER BY start_datetime", 
-            [$class_id, $today]
-        );
         
+        // Requête SQL détaillée
+        $sql = "SELECT * FROM schedule 
+                WHERE class_id = ? 
+                AND DATE(start_datetime) = ?
+                ORDER BY start_datetime";
+        
+        error_log("Recherche de cours - Classe ID: $class_id, Date: $today");
+        
+        $schedulesData = $db->fetchAll($sql, [$class_id, $today]);
+        
+        error_log("Nombre de cours trouvés : " . count($schedulesData));
+        
+        // Log des données brutes
+        if (!empty($schedulesData)) {
+            foreach ($schedulesData as $scheduleData) {
+                error_log("Cours trouvé - ID: " . $scheduleData['id'] . 
+                          ", Début: " . $scheduleData['start_datetime'] . 
+                          ", Fin: " . $scheduleData['end_datetime']);
+            }
+        }
+    
         $schedules = [];
         foreach ($schedulesData as $scheduleData) {
             $schedules[] = self::createFromArray($scheduleData);

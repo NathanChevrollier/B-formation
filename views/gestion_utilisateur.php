@@ -83,7 +83,7 @@ $classes = Classroom::findAll();
             <?php if (!empty($users)): ?>
                 <?php foreach ($users as $user): ?>
                 <tr>
-                    <form method="POST" action="../user_controller.php">
+                    <form method="POST" action="user_controller.php">
                         <td>
                             <input type="text" name="surname" value="<?php echo htmlspecialchars($user->getSurname()); ?>" class="form-control">
                         </td>

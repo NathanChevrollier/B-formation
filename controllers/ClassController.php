@@ -29,11 +29,11 @@ class ClassController {
                 $class->setName($class_name);
                 $class->save();
                 
-                header("Location: ../views/gestion_classes.php");
+                header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             } else {
                 Session::setFlash('error', 'Le nom de la classe est requis.');
-                header("Location: ../views/gestion_classes.php");
+                header("Location: " . $_SERVER['HTTP_REFERER']);
                 exit();
             }
         }
@@ -62,7 +62,7 @@ class ClassController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: ../views/gestion_classes.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -90,7 +90,7 @@ class ClassController {
                 Session::setFlash('error', 'ID de classe manquant.');
             }
             
-            header("Location: ../views/gestion_classes.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }

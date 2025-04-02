@@ -42,7 +42,7 @@ class SignatureController {
                 Session::setFlash('error', 'Tous les champs sont requis.');
             }
             
-            header("Location: ../views/gestion_signature.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -70,7 +70,7 @@ class SignatureController {
                 Session::setFlash('error', 'Données invalides.');
             }
             
-            header("Location: ../views/gestion_signature.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -95,7 +95,7 @@ class SignatureController {
                 Session::setFlash('error', 'ID de signature manquant.');
             }
             
-            header("Location: ../views/gestion_signature.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -127,32 +127,31 @@ class SignatureController {
         Auth::requireRole('student');
         
         $user = Auth::getUser();
+        $scheduleId = $_POST['schedule_id'] ?? null;
         
-        // Trouver le cours en cours pour la classe de l'étudiant
-        $currentClass = Schedule::findCurrentForClass($user->getClassId());
+        if (!$scheduleId) {
+            Session::setFlash('error', 'Cours non spécifié');
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
         
-        if ($currentClass) {
-            // Chercher la signature existante
-            $signature = Signature::findByUserAndSchedule($user->getId(), $currentClass->getId());
-            
-            if ($signature) {
-                // Valider la signature
-                $signature->validate();
-                
-                Session::setFlash('success', 'Présence confirmée avec succès.');
-            } else {
-                // Créer une nouvelle signature validée
-                $signature = new Signature();
-                $signature->setUserId($user->getId())
-                         ->setScheduleId($currentClass->getId())
-                         ->setFileName('')
-                         ->setStatus(Signature::STATUS_VALIDATED)
-                         ->save();
-                
-                Session::setFlash('success', 'Présence enregistrée avec succès.');
-            }
+        // Chercher la signature existante
+        $signature = Signature::findByUserAndSchedule($user->getId(), $scheduleId);
+        
+        if ($signature) {
+            // Valider la signature existante
+            $signature->validate();
+            Session::setFlash('success', 'Présence confirmée avec succès.');
         } else {
-            Session::setFlash('error', 'Aucun cours en cours.');
+            // Créer une nouvelle signature validée
+            $signature = new Signature();
+            $signature->setUserId($user->getId())
+                     ->setScheduleId($scheduleId)
+                     ->setFileName('')
+                     ->setStatus(Signature::STATUS_VALIDATED)
+                     ->save();
+            
+            Session::setFlash('success', 'Présence enregistrée avec succès.');
         }
         
         header("Location: " . $_SERVER['HTTP_REFERER']);
