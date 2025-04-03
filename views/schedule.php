@@ -1,11 +1,31 @@
 <?php
-
 require_once __DIR__ . '/../config/autoload.php';
 require_once __DIR__ . '/../utils/verif.php';
 use Models\User;
 use Models\Classroom;
 use Utils\Auth;
 use Utils\Session;
+
+// Assurez-vous que l'utilisateur est connecté
+Auth::requireLogin();
+
+$user = Auth::getUser();
+$user_name = $user->getFirstname() . ' ' . $user->getSurname();
+$user_role = $user->getRole();
+
+// Récupérer l'emploi du temps en fonction du rôle
+if ($user_role === 'student') {
+    // Pour un étudiant, récupérer l'emploi du temps de sa classe
+    $schedule = [];
+    if ($user->getClassId()) {
+        $schedule = \Models\Schedule::findByClassId($user->getClassId());
+    }
+} elseif ($user_role === 'teacher') {
+    // Pour un professeur, récupérer son propre emploi du temps
+    $schedule = \Models\Schedule::findByTeacherId($user->getId());
+} else {
+    $schedule = [];
+}
 
 ?>
 
@@ -39,22 +59,29 @@ use Utils\Session;
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($schedule as $entry): ?>
+            <?php if (empty($schedule)): ?>
                 <tr>
-                    <td><?php echo date("d/m/Y", strtotime($entry['start_datetime'])); ?></td>
-                    <td><?php echo date("H:i", strtotime($entry['start_datetime'])); ?> - <?php echo date("H:i", strtotime($entry['end_datetime'])); ?></td>
-                    <td><?php echo htmlspecialchars($entry['class_name']); ?></td>
-                    <td><?php echo htmlspecialchars($entry['subject_name']); ?></td>
-                    <?php if ($user_role === 'student'): ?>
-                        <td><?php echo htmlspecialchars($entry['teacher_firstname'] . ' ' . $entry['teacher_surname']); ?></td>
-                    <?php endif; ?>
+                    <td colspan="<?= $user_role === 'student' ? 5 : 4 ?>" class="text-center">
+                        Aucun cours prévu
+                    </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php else: ?>
+                <?php foreach ($schedule as $entry): ?>
+                    <tr>
+                        <td><?php echo date("d/m/Y", strtotime($entry->getStartDatetime())); ?></td>
+                        <td><?php echo date("H:i", strtotime($entry->getStartDatetime())); ?> - <?php echo date("H:i", strtotime($entry->getEndDatetime())); ?></td>
+                        <td><?php echo htmlspecialchars($entry->getClass()->getName()); ?></td>
+                        <td><?php echo htmlspecialchars($entry->getSubject()->getName()); ?></td>
+                        <?php if ($user_role === 'student'): ?>
+                            <td><?php echo htmlspecialchars($entry->getTeacher()->getEmail()); ?></td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

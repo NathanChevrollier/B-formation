@@ -7,7 +7,7 @@ use Utils\Auth;
 use Utils\Session;
 
 class AuthController {
-    // Traiter la tentative de connexion
+    //connexion
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
@@ -18,28 +18,29 @@ class AuthController {
                     $userRole = Session::get('user_role');
                     $validRoles = ['admin', 'teacher', 'student'];
                     if (in_array($userRole, $validRoles)) {
-                        header("Location: $userRole.php");
+                        // Utilisez un chemin absolu depuis la racine du projet
+                        header("Location: /b-formation/views/{$userRole}.php");
                     } else {
                         // Rôle non valide, redirection par défaut
-                        header("Location: ../index.html");
+                        header("Location: /b-formation/index.php");
                     }
                     exit();
                 } else {
                     // Échec de la connexion
                     Session::setFlash('error', 'Email ou mot de passe incorrect');
-                    header("Location: ../index.html");
+                    header("Location: /b-formation/index.php");
                     exit();
                 }
             } else {
                 // Champs manquants
                 Session::setFlash('error', 'Remplissez tous les champs');
-                header("Location: ../index.html");
+                header("Location: /b-formation/index.php");
                 exit();
             }
         }
     }
     
-    // Traiter l'inscription
+    // inscription
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstname = $_POST['firstname'] ?? '';
@@ -55,10 +56,10 @@ class AuthController {
                 header("Location: ../views/register.php");
                 exit();
             }
-            
+            // verif mdp
             if ($password !== $confirmPassword) {
                 Session::setFlash('error', 'Les mots de passe ne correspondent pas');
-                header("Location: ../views/register.php");
+                header("Location: views/register.php");
                 exit();
             }
             
@@ -80,7 +81,7 @@ class AuthController {
             
             // Rediriger vers la page de connexion
             Session::setFlash('success', 'Inscription réussie, vous pouvez vous connecter');
-            header("Location: ../index.html");
+            header("Location: /b-formation/index.php");
             exit();
         }
     }

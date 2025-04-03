@@ -59,30 +59,36 @@ $schedule = Schedule::findTodayForClass($user->getClassId());
         <div class="today-section text-center w-100">
             <h2 class="mb-3">Aujourd'hui</h2>
             <div class="card-container d-flex justify-content-around gap-4 flex-wrap">
-                <?php foreach ($schedule as $entry): ?>
-                    <?php 
-                        // Vérifier si une signature existe pour ce cours
-                        $signature = Signature::findByUserAndSchedule($user->getId(), $entry->getId());
-                        $status = $signature ? $signature->getStatus() : 'Non signé';
-                    ?>
-                    <div class="card text-center mx-auto" style="width: 100%; max-width: 200px;">
-                        <h3><?php echo htmlspecialchars($entry->getSubject()->getName()); ?></h3>
-                        <h4 class="text-muted">
-                            <?php echo date("H:i", strtotime($entry->getStartDatetime())); ?> - 
-                            <?php echo date("H:i", strtotime($entry->getEndDatetime())); ?>
-                        </h4>
-                        <p class="text-muted">Statut: <strong><?php echo ucfirst($status); ?></strong></p>
-                        <?php if ($status === 'Non signé' || $status === 'pending'): ?>
-                            <form method="POST" action="../signature_controller.php">
-                                <input type="hidden" name="action" value="validateSignature">
-                                <input type="hidden" name="schedule_id" value="<?= $entry->getId(); ?>">
-                                <button type="submit" class="btn btn-primary mt-3">Signer</button>
-                            </form>
-                        <?php else: ?>
-                            <button class="btn btn-success mt-3" disabled>Signé</button>
-                        <?php endif; ?>
+                <?php if (empty($schedule)): ?>
+                    <div class="alert alert-info w-100" role="alert">
+                        <p class="mb-0">Aucun cours prévu aujourd'hui. Profitez de votre temps !</p>
                     </div>
-                <?php endforeach; ?>
+                <?php else: ?>
+                    <?php foreach ($schedule as $entry): ?>
+                        <?php 
+                            // Vérifier si une signature existe pour ce cours
+                            $signature = Signature::findByUserAndSchedule($user->getId(), $entry->getId());
+                            $status = $signature ? $signature->getStatus() : 'Non signé';
+                        ?>
+                        <div class="card text-center mx-auto" style="width: 100%; max-width: 200px;">
+                            <h3><?php echo htmlspecialchars($entry->getSubject()->getName()); ?></h3>
+                            <h4 class="text-muted">
+                                <?php echo date("H:i", strtotime($entry->getStartDatetime())); ?> - 
+                                <?php echo date("H:i", strtotime($entry->getEndDatetime())); ?>
+                            </h4>
+                            <p class="text-muted">Statut: <strong><?php echo ucfirst($status); ?></strong></p>
+                            <?php if ($status === 'Non signé' || $status === 'pending'): ?>
+                                <form method="POST" action="../signature_controller.php">
+                                    <input type="hidden" name="action" value="validateSignature">
+                                    <input type="hidden" name="schedule_id" value="<?= $entry->getId(); ?>">
+                                    <button type="submit" class="btn btn-primary mt-3">Signer</button>
+                                </form>
+                            <?php else: ?>
+                                <button class="btn btn-success mt-3" disabled>Signé</button>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

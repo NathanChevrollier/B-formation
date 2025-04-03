@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     <div class="container-fluid">
 
         <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="assets/imgs/logo_inner_transparent.png" alt="Logo" width="50" height="auto" class="me-2">
+            <img src="../assets/imgs/logo_inner_transparent.png" alt="Logo" width="50" height="auto" class="me-2">
             <span class="text-white h4 mb-0">B-Formation</span>
         </a>
 

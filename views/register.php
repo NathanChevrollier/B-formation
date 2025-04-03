@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+require_once __DIR__ . '/../config/autoload.php';
+use Utils\Session;
+?>
+
 <html lang="fr">
 
 <head>
@@ -12,6 +16,13 @@
 <body class="d-flex flex-column justify-content-center align-items-center vh-100 bg-light">
 
     <img class="logo mb-3" src="../assets/imgs/logo.webp" alt="Logo" width="142 px" height="auto">
+    <?php 
+    // Afficher les messages d'erreur
+    if (Session::has('error')): ?>
+        <div class="alert alert-danger">
+            <?php echo Session::getFlash('error'); ?>
+        </div>
+    <?php endif; ?>
 
     <form action="../register_controller.php" method="post" class="login bg-white p-4 rounded shadow-sm w-100"
         style="max-width: 330px;">
@@ -45,7 +56,7 @@
         <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
 
         <div class="form-login mt-3 text-center">
-            <a href="../index.html" target="_self">Connectez-vous</a>
+            <a href="../index.php" target="_self">Connectez-vous</a>
         </div>
 
         <p class="mt-4 text-muted text-center">© 2017–2024</p>
