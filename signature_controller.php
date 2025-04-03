@@ -22,6 +22,12 @@ switch ($action) {
     case 'registerForClass':
         $controller->registerForClass();
         break;
+    case 'closeSignatures':
+        $controller->closeSignatures();
+        break;
+    case 'registerForSelectedStudents':
+        $controller->registerForSelectedStudents();
+        break;
     default:
         $controller->index();
         break;

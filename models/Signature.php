@@ -14,6 +14,7 @@ class Signature {
     // Statuts
     const STATUS_PENDING = 'pending';
     const STATUS_VALIDATED = 'validated';
+    const STATUS_ABSENT = 'absent';
     
     // Getters et Setters
     public function getId() {
@@ -57,7 +58,7 @@ class Signature {
     }
     
     public function setStatus($status) {
-        if (!in_array($status, [self::STATUS_PENDING, self::STATUS_VALIDATED])) {
+        if (!in_array($status, [self::STATUS_PENDING, self::STATUS_VALIDATED, self::STATUS_ABSENT])) {
             $status = self::STATUS_PENDING;
         }
         $this->status = $status;
@@ -164,6 +165,21 @@ class Signature {
         }
         
         return self::createFromArray($signatureData);
+    }
+    
+    public static function findByScheduleAndStatus($schedule_id, $status) {
+        $db = Database::getInstance();
+        $signaturesData = $db->fetchAll(
+            "SELECT * FROM signature WHERE Schedule_id = ? AND status = ?", 
+            [$schedule_id, $status]
+        );
+        
+        $signatures = [];
+        foreach ($signaturesData as $signatureData) {
+            $signatures[] = self::createFromArray($signatureData);
+        }
+        
+        return $signatures;
     }
     
     // Récupérer les signatures avec détails

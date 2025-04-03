@@ -11,6 +11,7 @@ class Schedule {
     private $class_id;
     private $user_id;
     private $subject_id;
+    private $signatures_open;
     
     // Getters et Setters
     public function getId() {
@@ -66,6 +67,15 @@ class Schedule {
         $this->subject_id = $subject_id;
         return $this;
     }
+
+    public function getSignaturesOpen() {
+        return $this->signatures_open;
+    }
+
+    public function setSignaturesOpen($signatures_open) {
+        $this->signatures_open = $signatures_open;
+        return $this;
+    }
     
     // Méthodes CRUD
     public function save() {
@@ -78,7 +88,8 @@ class Schedule {
                 'end_datetime' => $this->end_datetime,
                 'class_id' => $this->class_id,
                 'User_id' => $this->user_id,
-                'Subject_id' => $this->subject_id
+                'Subject_id' => $this->subject_id,
+                'signatures_open' => $this->signatures_open ? 1 : 0
             ], 'id = ?', [$this->id]);
         } else {
             // Création
@@ -87,7 +98,8 @@ class Schedule {
                 'end_datetime' => $this->end_datetime,
                 'class_id' => $this->class_id,
                 'User_id' => $this->user_id,
-                'Subject_id' => $this->subject_id
+                'Subject_id' => $this->subject_id,
+                'signatures_open' => $this->signatures_open ? 1 : 0 
             ]);
         }
         
@@ -315,6 +327,7 @@ class Schedule {
         $schedule->setClassId($scheduleData['class_id']);
         $schedule->setUserId($scheduleData['User_id']);
         $schedule->setSubjectId($scheduleData['Subject_id']);
+        $schedule->setSignaturesOpen(isset($scheduleData['signatures_open']) ? (bool)$scheduleData['signatures_open'] : false);
         
         return $schedule;
     }
@@ -335,5 +348,18 @@ class Schedule {
         }
         
         return $classes;
+    }
+
+    public function getSignaturesWithStudentDetails() {
+        $db = Database::getInstance();
+        $sql = "
+            SELECT s.id, s.status, u.id as user_id, u.firstname, u.surname, u.email 
+            FROM signature s
+            JOIN user u ON s.User_id = u.id
+            WHERE s.Schedule_id = ?
+            ORDER BY u.surname, u.firstname
+        ";
+        
+        return $db->fetchAll($sql, [$this->id]);
     }
 }
