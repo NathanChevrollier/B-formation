@@ -19,22 +19,22 @@ class AuthController {
                     $validRoles = ['admin', 'teacher', 'student'];
                     if (in_array($userRole, $validRoles)) {
                         // Utilisez un chemin absolu depuis la racine du projet
-                        header("Location: /b-formation/views/{$userRole}.php");
+                        header("Location: " . BASE_URL . "/views/{$userRole}.php");
                     } else {
                         // Rôle non valide, redirection par défaut
-                        header("Location: /b-formation/index.php");
+                        header("Location: " . BASE_URL . "/index.php");
                     }
                     exit();
                 } else {
                     // Échec de la connexion
                     Session::setFlash('error', 'Email ou mot de passe incorrect');
-                    header("Location: /b-formation/index.php");
+                    header("Location: " . BASE_URL . "/index.php");
                     exit();
                 }
             } else {
                 // Champs manquants
                 Session::setFlash('error', 'Remplissez tous les champs');
-                header("Location: /b-formation/index.php");
+                header("Location: " . BASE_URL . "/index.php");
                 exit();
             }
         }
@@ -53,20 +53,20 @@ class AuthController {
             // Vérification des champs
             if (!$firstname || !$surname || !$email || !$password) {
                 Session::setFlash('error', 'Tous les champs sont obligatoires');
-                header("Location: ../views/register.php");
+                header(header: "Location: " . BASE_URL . "/views/register.php");
                 exit();
             }
             // verif mdp
             if ($password !== $confirmPassword) {
                 Session::setFlash('error', 'Les mots de passe ne correspondent pas');
-                header("Location: views/register.php");
+                header(header: "Location: " . BASE_URL . "/views/register.php");
                 exit();
             }
             
             // Vérifier si l'email est déjà utilisé
             if (User::findByEmail($email)) {
                 Session::setFlash('error', 'Cet email est déjà utilisé');
-                header("Location: ../views/register.php");
+                header(header: "Location: " . BASE_URL . "/views/register.php");
                 exit();
             }
             
@@ -81,7 +81,7 @@ class AuthController {
             
             // Rediriger vers la page de connexion
             Session::setFlash('success', 'Inscription réussie, vous pouvez vous connecter');
-            header("Location: /b-formation/index.php");
+            header("Location: " . BASE_URL . "/index.php");
             exit();
         }
     }
@@ -91,7 +91,7 @@ class AuthController {
 
         Session::destroy();
         
-        header("Location: /b-formation/index.php");
+        header("Location: " . BASE_URL . "/index.php");
         exit();
     }
 }

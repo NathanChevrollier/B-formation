@@ -26,13 +26,13 @@ $classes = Classroom::findAll();
 <header class="bg-secondary text-white py-3 mb-4">
     <div class="container text-center">
         <h1 class="mb-2">Gestion des Utilisateurs</h1>
-        <a href="/b-formation/views/admin.php" class="btn btn-outline-light">Retour à l'Accueil Admin</a>
+        <a href="<?= BASE_URL ?>/views/admin.php" class="btn btn-outline-light">Retour à l'Accueil Admin</a>
     </div>
 </header>
 
 <div class="container">
     <h2 class="mb-4">Ajouter un Utilisateur</h2>
-    <form method="POST" action="user_controller.php" class="mb-4">
+    <form method="POST" action="<?= BASE_URL ?>/user_controller.php" class="mb-4">
         <div class="row g-3">
             <div class="col-md-2">
                 <input type="text" name="surname" class="form-control" placeholder="Nom" required>

@@ -1,4 +1,6 @@
 <?php
+// Charger les constantes (url debase pour vps)
+require_once __DIR__ . '/constants.php';
 
 // Fonction d'autoload pour charger automatiquement les classes
 
@@ -15,9 +17,6 @@ spl_autoload_register(function ($className) {
     
     return false;
 });
-
-
-
 
 // Démarrer la session
 \Utils\Session::start();

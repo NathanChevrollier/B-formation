@@ -148,7 +148,7 @@ foreach ($teacherClasses as $class) {
                         </table>
                     </div>
                     <div class="card-footer">
-                        <form method="POST" action="/b-formation/signature_controller.php">
+                        <form method="POST" action="<?= BASE_URL ?>/signature_controller.php">
                             <input type="hidden" name="action" value="closeSignatures">
                             <input type="hidden" name="schedule_id" value="<?= $entry->getId(); ?>">
                             <button type="submit" class="btn btn-warning btn-sm">Fermer les signatures</button>
@@ -247,7 +247,7 @@ foreach ($teacherClasses as $class) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="signatureForm<?= $entry->getId(); ?>" method="POST" action="/b-formation/signature_controller.php">
+                        <form id="signatureForm<?= $entry->getId(); ?>" method="POST" action="<?= BASE_URL ?>/signature_controller.php">
                             <input type="hidden" name="action" value="registerForSelectedStudents">
                             <input type="hidden" name="schedule_id" value="<?= $entry->getId(); ?>">
                             

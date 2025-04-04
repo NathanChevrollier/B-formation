@@ -81,7 +81,7 @@ $schedule = Schedule::findTodayForClass($classId);
                             <?php echo ucfirst($status); ?>
                         </span>
                         <?php if (($status === 'Non signé' || $status === 'pending') && $entry->getSignaturesOpen()): ?>
-                            <form method="POST" action="../signature_controller.php" class="mt-3">
+                            <form method="POST" action="<?= BASE_URL ?>/signature_controller.php" class="mt-3">
                                 <input type="hidden" name="action" value="validateSignature">
                                 <input type="hidden" name="schedule_id" value="<?= $entry->getId(); ?>">
                                 <button type="submit" class="btn btn-primary">Signer</button>

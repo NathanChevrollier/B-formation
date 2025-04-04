@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
                     <a class="nav-link text-white" href="schedule.php">Emploi du temps</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="../utils/logout.php">Déconnexion</a>
+                    <a class="nav-link text-white" href="<?= BASE_URL ?>/utils/logout.php">Déconnexion</a>
                 </li>
             </ul>
         </div>

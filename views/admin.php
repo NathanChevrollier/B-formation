@@ -22,7 +22,7 @@ $user_name = $user->getEmail();
         <div class="container text-center">
             <h1 class="mb-2">Panneau d'administration</h1>
             <p class="mb-2">Connecté en tant que <strong><?php echo htmlspecialchars($user_name); ?></strong></p>
-            <a href="../utils/logout.php" class="btn btn-outline-light">Déconnexion</a>
+            <a href="<?= BASE_URL ?>/utils/logout.php" class="btn btn-outline-light">Déconnexion</a>
         </div>
     </header>
 
@@ -34,7 +34,7 @@ $user_name = $user->getEmail();
                     <div class="card-body">
                         <h3 class="card-title">Gestion des utilisateurs</h3>
                         <p class="card-text">Créez et gérez les comptes des enseignants et des élèves, et attribuez-les aux classes respectives.</p>
-                        <a href="../user_controller.php" class="btn btn-primary w-100">Gérer les utilisateurs</a>
+                        <a href="<?= BASE_URL ?>/user_controller.php" class="btn btn-primary w-100">Gérer les utilisateurs</a>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@ $user_name = $user->getEmail();
                     <div class="card-body">
                         <h3 class="card-title">Gestion des classes</h3>
                         <p class="card-text">Ajoutez, modifiez ou supprimez des classes. Associez les enseignants et les élèves aux différentes classes.</p>
-                        <a href="../class_controller.php" class="btn btn-primary w-100">Gérer les classes</a>
+                        <a href="<?= BASE_URL ?>/class_controller.php" class="btn btn-primary w-100">Gérer les classes</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@ $user_name = $user->getEmail();
                     <div class="card-body">
                         <h3 class="card-title">Gestion des matières</h3>
                         <p class="card-text">Gérez les Cours enseignées et associez-les aux différents enseignants et classes.</p><br>
-                        <a href="../subject_controller.php" class="btn btn-primary w-100">Gérer les matières</a>
+                        <a href="<?= BASE_URL ?>/subject_controller.php" class="btn btn-primary w-100">Gérer les matières</a>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@ $user_name = $user->getEmail();
                     <div class="card-body">
                         <h3 class="card-title">Gestion des emplois du temps</h3>
                         <p class="card-text">Créez et modifiez les emplois du temps des classes, en ajoutant des matières et des horaires pour chaque classe.</p>
-                        <a href="../schedule_controller.php" class="btn btn-primary w-100">Gérer les emplois du temps</a>
+                        <a href="<?= BASE_URL ?>/schedule_controller.php" class="btn btn-primary w-100">Gérer les emplois du temps</a>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@ $user_name = $user->getEmail();
                     <div class="card-body">
                         <h3 class="card-title">Gestion des signatures de présence</h3>
                         <p class="card-text">Suivez les présences et enregistrez les signatures des élèves pour chaque cours.</p>
-                        <a href="../signature_controller.php" class="btn btn-primary w-100">Gérer les signatures de présence</a>
+                        <a href="<?= BASE_URL ?>/signature_controller.php" class="btn btn-primary w-100">Gérer les signatures de présence</a>
                     </div>
                 </div>
             </div>

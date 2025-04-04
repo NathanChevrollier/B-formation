@@ -25,7 +25,7 @@ class Database {
         }
     }
     
-    // Obtenir l'instance unique de la classe (pattern Singleton)
+    // Obtenir l'instance unique de la classe
     public static function getInstance() {
         if (self::$instance === null) {
             self::$instance = new self();

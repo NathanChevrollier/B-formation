@@ -23,7 +23,7 @@ $subjects = Subject::findAll();
 <header class="bg-secondary text-white py-3 mb-4">
     <div class="container text-center">
         <h1 class="mb-2">Gestion des matières</h1>
-        <a href="/b-formation/views/admin.php" class="btn btn-outline-light">Retour à l'accueil admin</a>
+        <a href="<?= BASE_URL ?>/views/admin.php" class="btn btn-outline-light">Retour à l'accueil admin</a>
     </div>
 </header>
 

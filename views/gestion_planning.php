@@ -46,7 +46,7 @@ $teachers = User::findByRole('teacher');
 <header class="bg-secondary text-white py-3 mb-4">
     <div class="container text-center">
         <h1 class="mb-2">Gestion des Emplois du Temps</h1>
-        <a href="/b-formation/views/admin.php" class="btn btn-outline-light">Retour à l'Accueil Admin</a>
+        <a href="<?= BASE_URL ?>/views/admin.php" class="btn btn-outline-light">Retour à l'Accueil Admin</a>
     </div>
 </header>
 

@@ -52,7 +52,7 @@ class Auth {
     // Rediriger si l'utilisateur n'est pas connecté
     public static function requireLogin() {
         if (!self::check()) {
-            header('Location: index.html');
+            header('Location: ' . BASE_URL . '/index.html');
             exit();
         }
     }
@@ -62,7 +62,7 @@ class Auth {
         self::requireLogin();
         
         if (!self::hasRole($role)) {
-            header('Location: index.html');
+            header('Location: ' . BASE_URL . '/index.html');
             exit();
         }
     }
