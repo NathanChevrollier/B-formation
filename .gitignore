@@ -1,0 +1,4 @@
+config/config_secure.php
+config/constants.php
+config/config.php
+*.sql
