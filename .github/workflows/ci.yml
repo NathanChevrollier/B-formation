@@ -1,13 +1,22 @@
-name: CI
+name: deploy
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Add VPS key to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "[51.89.150.209]:6666 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP4UWxTGWJczjsMCy0TTI7spTiBi3gTekT3qbUSk/G85" >> ~/.ssh/known_hosts
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
@@ -17,10 +26,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 6666
           script: |
-            mkdir -p ~/.ssh
-            echo "::add-mask::${{ secrets.SERVER_KNOWN_HOSTS }}"
-            echo "${{ secrets.SERVER_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
-            cat ~/.ssh/known_hosts
-            sudo git config --global --add safe.directory ${{ secrets.PROJECT_PATH }}
-            cd ${{ secrets.PROJECT_PATH }}
-            sudo git pull
+            cd /var/www/html/bformation.chevrolliernathan.fr
+            git pull origin main
