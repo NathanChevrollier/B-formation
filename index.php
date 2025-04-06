@@ -1,5 +1,5 @@
 <?php
-// test
+// test 2
 require_once 'config/autoload.php';
 
 // Routeur simple
