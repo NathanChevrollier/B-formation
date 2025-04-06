@@ -59,42 +59,39 @@ $schedule = Schedule::findTodayForClass($classId);
                     <?php 
                         $signature = Signature::findByUserAndSchedule($user->getId(), $entry->getId());
                         $status = $signature ? $signature->getStatus() : 'Non signé';
-                        
-                        // Déterminer si les signatures sont ouvertes pour ce cours
-                        $signaturesOpen = $entry->getSignaturesOpen();
-                        
-                        // Définir le statut d'affichage et la classe du badge
-                        if ($signaturesOpen) {
-                            // Si les signatures sont ouvertes
-                            if ($status === 'validated') {
-                                $displayStatus = 'Signé';
-                                $badgeClass = 'bg-success text-white';
-                            } else {
-                                $displayStatus = 'En attente de signature';
-                                $badgeClass = 'bg-warning text-dark';
-                            }
-                        } else {
-                            // Si les signatures ne sont pas encore ouvertes
-                            $displayStatus = 'En attente du professeur';
-                            $badgeClass = 'bg-secondary text-white';
-                        }
+
+                        $badgeClass = match ($status) {
+                            'signé' => 'bg-success text-white',
+                            'pending' => 'bg-warning text-dark',
+                            default => 'bg-danger text-white',
+                        };
                     ?>
-
-                    <span class="badge rounded-pill <?= $badgeClass ?>">
-                        <?php echo $displayStatus; ?>
-                    </span>
-
-                    <?php if ($signaturesOpen && ($status !== 'validated')): ?>
-                        <form method="POST" action="<?= BASE_URL ?>/signature_controller.php" class="mt-3">
-                            <input type="hidden" name="action" value="validateSignature">
-                            <input type="hidden" name="schedule_id" value="<?= $entry->getId(); ?>">
-                            <button type="submit" class="btn btn-primary">Signer</button>
-                        </form>
-                    <?php elseif ($status === 'validated'): ?>
-                        <button class="btn btn-success mt-3" disabled>Déjà signé</button>
-                    <?php else: ?>
-                        <button class="btn btn-secondary mt-3" disabled>En attente du professeur</button>
-                    <?php endif; ?>
+                    <div class="card shadow p-3 text-center" style="width: 100%; max-width: 280px;">
+                        <h4 class="mb-2">
+                            <i class="bi bi-journal-bookmark"></i> 
+                            <?php echo htmlspecialchars($entry->getSubject()->getName()); ?>
+                        </h4>
+                        <p class="mb-1 text-muted">
+                            <i class="bi bi-clock"></i>
+                            <?php echo date("H:i", strtotime($entry->getStartDatetime())); ?>
+                            -
+                            <?php echo date("H:i", strtotime($entry->getEndDatetime())); ?>
+                        </p>
+                        <span class="badge rounded-pill <?= $badgeClass ?>">
+                            <?php echo ucfirst($status); ?>
+                        </span>
+                        <?php if (($status === 'Non signé' || $status === 'pending') && $entry->getSignaturesOpen()): ?>
+                            <form method="POST" action="<?= BASE_URL ?>/signature_controller.php" class="mt-3">
+                                <input type="hidden" name="action" value="validateSignature">
+                                <input type="hidden" name="schedule_id" value="<?= $entry->getId(); ?>">
+                                <button type="submit" class="btn btn-primary">Signer</button>
+                            </form>
+                        <?php elseif ($status === 'validated' || $status === 'signé'): ?>
+                            <button class="btn btn-success mt-3" disabled>Déjà signé</button>
+                        <?php else: ?>
+                            <button class="btn btn-secondary mt-3" disabled>En attente du professeur</button>
+                        <?php endif; ?>
+                    </div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
