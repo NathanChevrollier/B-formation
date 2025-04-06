@@ -9,20 +9,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Add VPS to known_hosts
-        run: |
-          mkdir -p $HOME/.ssh
-          ssh-keyscan -p 666 -H ${{ secrets.SERVER_IP }} >> $HOME/.ssh/known_hosts
-
-      - name: Push to server
+      - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 666
+          known_hosts: ${{ secrets.SERVER_KNOWN_HOSTS }}
           script: |
             sudo git config --global --add safe.directory ${{ secrets.PROJECT_PATH }}
             cd ${{ secrets.PROJECT_PATH }}
             sudo git pull
+
 
