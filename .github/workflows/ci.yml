@@ -18,7 +18,9 @@ jobs:
           port: 6666
           script: |
             mkdir -p ~/.ssh
-            echo "${{ secrets.SERVER_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+            echo "::add-mask::${{ secrets.SERVER_KNOWN_HOSTS }}"
+            echo "${{ secrets.SERVER_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+            cat ~/.ssh/known_hosts
             sudo git config --global --add safe.directory ${{ secrets.PROJECT_PATH }}
             cd ${{ secrets.PROJECT_PATH }}
             sudo git pull
