@@ -15,7 +15,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 666
+          port: 6666
           known_hosts: ${{ secrets.SERVER_KNOWN_HOSTS }}
           script: |
             sudo git config --global --add safe.directory ${{ secrets.PROJECT_PATH }}
