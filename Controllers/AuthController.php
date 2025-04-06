@@ -27,14 +27,12 @@ class AuthController {
                     exit();
                 } else {
                     // Échec de la connexion
-                    Session::setFlash('error', 'Email ou mot de passe incorrect');
-                    header("Location: " . BASE_URL . "/index.php");
+                    header("Location: " . BASE_URL . "/index.html?error=login_failed");
                     exit();
                 }
             } else {
                 // Champs manquants
-                Session::setFlash('error', 'Remplissez tous les champs');
-                header("Location: " . BASE_URL . "/index.php");
+                header("Location: " . BASE_URL . "/index.html?error=fields_required");
                 exit();
             }
         }
